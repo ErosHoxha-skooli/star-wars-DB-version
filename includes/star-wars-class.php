@@ -67,16 +67,18 @@ class Star_Wars_Widget extends WP_Widget
             echo "<input type='submit' value='Submit the form'/>";
             echo '</form>';
             echo '</div>';
-            $test = $_POST['nr_of_ships'];
-            $wpdb->update(
-                $table_name,
-                array(
-                    'nr_of_ships' => $test,
-                ),
-               array(
-                    'id' => $r->id,
-                )
-            );
+            if (isset($_POST['nr_of_ships'])) {
+                $test = $_POST['nr_of_ships'];
+                $wpdb->update(
+                    $table_name,
+                    array(
+                        'nr_of_ships' => $test,
+                    ),
+                    array(
+                        'id' => $r->id,
+                    )
+                );
+            }
         }
     }
 }
