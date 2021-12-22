@@ -19,6 +19,23 @@ class Star_Wars_Widget extends WP_Widget
         if (!empty($instance['title'])) {
             echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
         }
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'starwars';
+        $db_results = $wpdb->get_results(" SELECT * FROM $table_name ");   
+             if (isset($_POST['nr_of_ships'])) {
+                $test = $_POST['nr_of_ships'];
+                foreach ($db_results as $r) {
+                $wpdb->update(
+                    $table_name,
+                    array(
+                        'nr_of_ships' => $test,
+                    ),
+                    array(
+                        'id' => $r->id,
+                    )
+                );
+           }
+        }
         $this->render_ship_selector();
         $this->render_ship_information();
     }
@@ -67,17 +84,6 @@ class Star_Wars_Widget extends WP_Widget
             echo "<input type='submit' value='Submit the form'/>";
             echo '</form>';
             echo '</div>';
-            if (isset($_POST['nr_of_ships'])) {
-                $test = $_POST['nr_of_ships'];
-                $wpdb->update(
-                    $table_name,
-                    array(
-                        'nr_of_ships' => $test,
-                    ),
-                    array(
-                        'id' => $r->id,
-                    )
-                );
             }
         }
     }
