@@ -19,22 +19,24 @@ class Star_Wars_Widget extends WP_Widget
         if (!empty($instance['title'])) {
             echo $args['before_title'] . apply_filters('widget_title', $instance['title']) . $args['after_title'];
         }
+
         global $wpdb;
         $table_name = $wpdb->prefix . 'starwars';
-        $db_results = $wpdb->get_results(" SELECT * FROM $table_name ");   
-             if (isset($_POST['nr_of_ships'])) {
-                $test = $_POST['nr_of_ships'];
-                foreach ($db_results as $r) {
+        $db_results = $wpdb->get_results(" SELECT * FROM $table_name ");
+        if (isset($_POST['nr_of_ships'])) {
+            $test = $_POST['nr_of_ships'];
+            $idtest = $_POST['id'];
+            foreach ($db_results as $r) {
                 $wpdb->update(
                     $table_name,
                     array(
                         'nr_of_ships' => $test,
                     ),
                     array(
-                        'id' => $r->id,
+                        'id' => $idtest,
                     )
                 );
-           }
+            }
         }
         $this->render_ship_selector();
         $this->render_ship_information();
@@ -53,7 +55,7 @@ class Star_Wars_Widget extends WP_Widget
         $db_results = $wpdb->get_results(" SELECT * FROM $table_name ");
         echo '<div>';
         echo '<select>';
-        echo '<option>Chose Ship</option>';
+        echo '<option>Choose Ship</option>';
         foreach ($db_results as $r) {
             echo  "<option value='ship-{$r->id}' >$r->name</option>";
         }
@@ -67,7 +69,10 @@ class Star_Wars_Widget extends WP_Widget
         $table_name = $wpdb->prefix . 'starwars';
         $db_results = $wpdb->get_results(" SELECT * FROM $table_name ");
         foreach ($db_results as $r) {
-            echo "<div class='ship-{$r->id} box'>" . PHP_EOL;
+            echo "<form method='POST'>";
+            echo "<div class='ship-{$r->id} box' >" . PHP_EOL;
+            echo "<div class='id' name='id'>ID: $r->id</div>" . PHP_EOL;
+            echo "<input type='text' name='id' placeholder='Type the ID shown above'>";
             echo "<div class='manufacturer'>Manufacturer: $r->manufacturer</div>" . PHP_EOL;
             echo "<div class='cost_in_credits'>Cost in credits: $r->cost_in_credits</div>" . PHP_EOL;
             echo "<div class='length'>Length: $r->length</div>" . PHP_EOL;
@@ -79,12 +84,10 @@ class Star_Wars_Widget extends WP_Widget
             echo "<div class='hyperdrive_rating'>Hyperdrive rating: $r->hyperdrive_rating</div>" . PHP_EOL;
             echo "<div class='MGLT'>MGLT: $r->MGLT</div>" . PHP_EOL;
             echo "<div class='starship_class'>Starship class: $r->starship_class</div>" . PHP_EOL;
-            echo "<form method='POST'>";
             echo '<label>' . "Number of ships: " . '</label>' . '<br>' . "<input type='text' name='nr_of_ships'>" . '<br>' . '<br>';
             echo "<input type='submit' value='Submit the form'/>";
             echo '</form>';
             echo '</div>';
-            }
         }
     }
 }
