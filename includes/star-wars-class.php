@@ -71,8 +71,8 @@ class Star_Wars_Widget extends WP_Widget
         foreach ($db_results as $r) {
             echo "<form method='POST'>";
             echo "<div class='ship-{$r->id} box' >" . PHP_EOL;
-            echo "<div class='id' name='id'>ID: $r->id</div>" . PHP_EOL;
-            echo "<input type='text' name='id' placeholder='Type the ID shown above'>";
+            echo "<div class='id'>ID: $r->id</div>" . PHP_EOL;
+            echo "<input type='text' name='id' value='$r->id'>";
             echo "<div class='manufacturer'>Manufacturer: $r->manufacturer</div>" . PHP_EOL;
             echo "<div class='cost_in_credits'>Cost in credits: $r->cost_in_credits</div>" . PHP_EOL;
             echo "<div class='length'>Length: $r->length</div>" . PHP_EOL;
