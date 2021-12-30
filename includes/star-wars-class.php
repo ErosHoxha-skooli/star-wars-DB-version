@@ -85,7 +85,7 @@ class Star_Wars_Widget extends WP_Widget
             echo "<div class='MGLT'>MGLT: $r->MGLT</div>" . PHP_EOL;
             echo "<div class='starship_class'>Starship class: $r->starship_class</div>" . PHP_EOL;
             echo '<label>' . "Number of ships: " . '</label>' . '<br>' . "<input type='number' min='0' name='nr_of_ships'>" . '<br>' . '<br>';
-            echo "<input type='submit' value='Submit the form'/>";
+            echo "<input type='submit' name='submit' value='Submit the form'/>";
             echo '</form>';
             echo '</div>';
         }
