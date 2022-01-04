@@ -3,18 +3,19 @@
 /**
  * Plugin Name: Star Wars Plugin
  */
+
 if (!defined('ABSPATH')) {
     exit;
-}
-
-function register_starwars()
-{
-    register_widget('Star_Wars_Widget');
 }
 
 require_once(plugin_dir_path(__FILE__) . './includes/star-wars-scripts.php');
 require_once(plugin_dir_path(__FILE__) . './includes/star-wars-class.php');
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+
+function register_starwars()
+{
+    register_widget('Star_Wars_Widget');
+}
 
 function get_ships()
 {
