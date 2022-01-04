@@ -23,11 +23,9 @@ class Star_Wars_Widget extends WP_Widget
 
         global $wpdb;
         $table_name = $wpdb->prefix . 'starwars';
-        $db_results = $wpdb->get_results(" SELECT * FROM $table_name ");
         if (isset($_POST['nr_of_ships'])) {
             $nr_of_ships = $_POST['nr_of_ships'];
             $id = $_POST['id'];
-            foreach ($db_results as $r) {
                 $wpdb->update(
                     $table_name,
                     array(
@@ -37,7 +35,6 @@ class Star_Wars_Widget extends WP_Widget
                         'id' => $id,
                     )
                 );
-            }
         }
         $this->render_ship_selector();
         $this->render_ship_information();
