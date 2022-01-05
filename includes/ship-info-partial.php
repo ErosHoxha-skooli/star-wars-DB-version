@@ -14,7 +14,7 @@
         <div class='starship_class'>Starship class: <?= "$r->starship_class" ?></div>
         <div class='cargo_capacity'>Cargo Capacity: <?= "$r->cargo_capacity" ?></div>
         <label>Number of ships: </label> <br>
-        <input type='number' min='0' name='nr_of_ships'> <br> <br>
+        <input type='number' min='0' name='nr_of_ships' required> <br> <br>
         <input type='submit' name='submit' value='Submit the form' />
     </form>
 </div>
