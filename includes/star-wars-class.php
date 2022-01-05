@@ -1,6 +1,6 @@
 <?php
-require_once(plugin_dir_path(__FILE__) . '/../star-wars.php');
 
+require_once(plugin_dir_path(__FILE__) . '/../star-wars.php');
 
 class Star_Wars_Widget extends WP_Widget
 {
@@ -26,15 +26,15 @@ class Star_Wars_Widget extends WP_Widget
         if (isset($_POST['nr_of_ships'])) {
             $nr_of_ships = $_POST['nr_of_ships'];
             $id = $_POST['id'];
-                $wpdb->update(
-                    $table_name,
-                    array(
-                        'nr_of_ships' => $nr_of_ships,
-                    ),
-                    array(
-                        'id' => $id,
-                    )
-                );
+            $wpdb->update(
+                $table_name,
+                array(
+                    'nr_of_ships' => $nr_of_ships,
+                ),
+                array(
+                    'id' => $id,
+                )
+            );
         }
         $this->render_ship_selector();
         $this->render_ship_information();
@@ -46,7 +46,7 @@ class Star_Wars_Widget extends WP_Widget
         return 'noform';
     }
 
-    function render_ship_selector()
+    private function render_ship_selector()
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'starwars';
@@ -54,7 +54,7 @@ class Star_Wars_Widget extends WP_Widget
         include('ship-selector-partial.php');
     }
 
-    function render_ship_information()
+    private function render_ship_information()
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'starwars';
